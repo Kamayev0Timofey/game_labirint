@@ -10,6 +10,7 @@ class Sprite(sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        
     def draw(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
@@ -19,6 +20,7 @@ class Player(Sprite):
         super().__init__(w, h, file_name, x, y)
         self.speed_x = 0
         self.speed_y = 0
+        
     def update(self):
         # TODO: проблема с кнопками
         self.speed_y = 0
@@ -50,12 +52,15 @@ class Player(Sprite):
                 self.rect.right = min(self.rect.right, wall.rect.left)
             if self.speed_x < 0:
                 self.rect.left = max(self.rect.left, wall.rect.right)
+
+
 class Enemy(Sprite):
     def __init__(self, w, h, file_name, x, y, left, right):
         super().__init__(w, h, file_name, x, y)
         self.left = left
         self.right = right
         self.side = 'left'
+        
     def update(self):
         if self.side == 'left':
             self.rect.x -= 2
@@ -162,3 +167,4 @@ while True:
             myz_vin.play()
     display.update()
     clock.tick(90)
+    
